@@ -7,9 +7,9 @@ All you need is the simple rake task. You can get it by installing this plugin:
 
   script/plugin install git://github.com/mikldt/db_cull.git
 
-But, it might just make more sense to copy down the rake task all by itself:
+But, it might just make more sense to copy down the rake task all by itself, and put it in your tasks directory:
 
-  wget http://github.com/mikldt/db_cull/blob/master/tasks/db_cull_tasks.rake > lib/tasks/db_cull_tasks.rake
+  wget http://github.com/mikldt/db_cull/raw/master/tasks/db_cull_tasks.rake -O lib/tasks/db_cull_tasks.rake
 
 == Use
 
