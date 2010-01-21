@@ -9,13 +9,13 @@ end
 
 namespace :db do
   # rake syntax is crazy.
-  # task name: sow
+  # task name: cull
   # sole argument: table
   # dependency: environment task
-  # example: rake db:sow[person]
+  # example: rake db:cull[person]
   # result: in an empty db, you can write rake db:seed to get the data back.
   desc "Copy all data from table into seeds.rb"
-  task :sow, [:table] => :environment do |t, args|
+  task :cull, [:table] => :environment do |t, args|
 
     begin
       model = args.table.classify.constantize
@@ -26,7 +26,7 @@ namespace :db do
 
     unless model.nil?
       lines = []
-      lines << "# Seeds sown from database using db_sow"
+      lines << "# Seeds culled from database using db_cull"
       lines << "#   Table:  #{model}"
       lines << "#   Schema: #{ActiveRecord::Migrator.current_version}"
       lines << "#   Added:  #{Time.now}"
