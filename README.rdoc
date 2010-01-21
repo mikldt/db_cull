@@ -1,0 +1,49 @@
+=db_cull
+db_cull provides a rake task to convert columns in your database into your seeds file for deployment. db_cull is meant to work with the seed feature that has been built into Rails since 2.3.4.
+
+==Installation
+
+All you need is the simple rake task. You can get it by installing this plugin:
+
+  script/plugin install git://github.com/mikldt/db_cull.git
+
+But, it might just make more sense to copy down the rake task all by itself:
+
+  wget http://github.com/mikldt/db_cull/blob/master/tasks/db_cull_tasks.rake > lib/tasks/db_cull_tasks.rake
+
+== Use
+
+The task is run once for each table, and pulls in all of the rows that are currently in that table. Use the ActiveRecord class name, in either the camelcase or lowercase-with-underscores format.
+
+  rake db:cull[classname]
+
+A create statement with each attribute (except the primary key) is added for each of the records currently in the table. You can, of course, go edit those manually in db/seeds.rb.
+
+As always, you can do this operation on a production database (or any other environment)
+
+  rake db:cull[classname] RAILS_ENV=production
+
+== Sowing the Seeds
+
+When starting a new deployment, you can create and migrate the db, as well as bring in the seed data, in one fell swoop:
+
+  rake db:setup
+
+However, if everything is already migrated and in place, you can simply bring the seed data to your database with
+
+  rake db:seed
+
+== Quick Notes
+
+This task copies over all data besides the primary key. If your seed data includes lots of referential situations, well, the foreign key references will be copied over as-is. In a perfect world, this might be alright (e.g., referencing only one entry), but if referential integrity is important you may want to go with another solution or manually beef up of db/seeds.rb.
+
+Also note that there is no control on the seeds: they are meant to be inserted once. So, if you seed twice, each record will be inserted in duplicate (barring validations or db-level uniqueness requirements). 
+
+== Further Reading
+
+* <b>Overview of seeds</b> (Robby on Rails blogpost): http://www.robbyonrails.com/articles/2009/09/05/planting-the-seeds
+* <b>db_cull tutorial</b> (my post on the RPI WTG blog): http://webtech.union.rpi.edu/blog/2010/01/20/culling-the-seeds/
+
+== License
+
+Copyright (c) 2010 Michael DiTore, released under the MIT license.
