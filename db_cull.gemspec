@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
      "README",
      "Rakefile",
      "VERSION",
+     "db_cull.gemspec",
      "init.rb",
      "tasks/db_cull_tasks.rake",
      "test/db_cull_test.rb",
