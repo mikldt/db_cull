@@ -47,7 +47,7 @@ namespace :db do
         lines << "  # Retrieved from #{model} ##{record.id}"
         record.attributes.each do |att, val|
           next if att == model.primary_key
-          lines << prefix + ":#{att} = \"#{val}\","
+          lines << prefix + ":#{att} => \"#{val}\","
           prefix = indent
         end
         lines.last.chop! # get rid of that last comma
