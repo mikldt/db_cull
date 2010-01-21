@@ -1,3 +1,7 @@
+# Rake tasks to cull seed data from the db to db/seeds.rb.
+# See http://github.com/mikldt/db_cull
+# Copyright © 2010 Michael DiTore, released under the MIT license. 
+
 def add_to_seeds(lines)
   File.open ("#{RAILS_ROOT}/db/seeds.rb", 'a') do |f|
     lines.each do |l|
@@ -40,7 +44,7 @@ namespace :db do
         count += 1
         prefix = create
 
-        lines << "  # Retrieved from organiztion ##{record.id}"
+        lines << "  # Retrieved from #{model} ##{record.id}"
         record.attributes.each do |att, val|
           next if att == model.primary_key
           lines << prefix + ":#{att} = \"#{val}\","
